@@ -1,11 +1,8 @@
 const list = {
 	"create a task": "In Progress",
 	"make a bed": "Done",
-	"write a post": "To Do",
-}
-// Функция changeStatus - будет менять статус задачи
-// changeStatus("write a post", "Done")
-
+	"write a post": "To Do"
+};
 // Функция showList будет выводить весь список дел в виде
 //
 // Todo:
@@ -15,22 +12,26 @@ const list = {
 // 	"write a post"
 // Done:
 
-function changeStatus (key, status) {
-	list[key] = status
+function changeStatus(key, status) {
+	list[key] = status;
 }
-function addTask (task) {
-	 list[task] = "In Progress";
+
+function addTask(task) {
+	list[task] = "In Progress";
 }
-function deleteTask (property) {
-	delete list[property]
+
+function deleteTask(key) {
+	delete list[key];
 }
-function showList (obj) {
-	return obj
-	//
+
+function showList(obj) {
+	for (let key in obj) {
+		console.log(obj[key] + ": " + key);
+	}
 }
+
 console.log(showList(list));
-// deleteTask('make a bed');
-changeStatus('write a post', 'Done')
+changeStatus("write a post", "Done");
 console.log(showList(list));
 // addTask('have a walk');
 
