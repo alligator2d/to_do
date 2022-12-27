@@ -3,34 +3,50 @@ const list = {
 	"make a bed": "Done",
 	"write a post": "To Do"
 };
-let temp=[];
-const tasks = document.querySelectorAll('.tasks');
-const newTask = document.querySelector('#myInput').value;
 
-document.querySelector('button').addEventListener('click', () => {
-	console.log('button!');
-	temp.push(newTask);
-	console.log(temp)
-})
+let temp = [];
+const tasks = document.querySelectorAll(".tasks");
+const newTask = document.querySelector(".input");
+const out = document.querySelector(".out");
 
-function getElem (arr) {
-	arr.forEach((key)=> {
-		 temp.push(key.innerText)
-	}) 
-	return temp
+
+document.querySelector("button").addEventListener("click", (e) => addTask());
+
+function checkEnter(e) {
+	if(e.key === "Enter" && newTask.value !== "") {
+		console.log("Finally");
+		addTask();
+	} else {
+		console.log("empty");
+	}
 }
-console.log(getElem(tasks))
 
+document.querySelector(".input").onkeydown = checkEnter;
 
+function getElem(arr) {
+	arr.forEach((key) => {
+		temp.push(key.innerText);
+	});
+	return temp;
+}
 
+console.log(getElem(tasks));
 
 
 function changeStatus(key, status) {
 	list[key] = status;
 }
 
-function addTask(task) {
-	list[task] = "In Progress";
+// function addTask(task) {
+// 	list[task] = "In Progress";
+// }
+
+function addTask() {
+	temp.push(newTask.value);
+	console.log(temp);
+	console.log(newTask);
+	out.innerHTML += newTask.value + " ";
+	newTask.value = "";
 }
 
 function deleteTask(key) {
@@ -43,7 +59,6 @@ function showList(obj) {
 	}
 }
 
-// console.log(showList(list));
 changeStatus("write a post", "Done");
 // console.log(showList(list));
 // addTask('have a walk');
