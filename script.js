@@ -15,52 +15,67 @@ function checkEnter(e) {
 
 document.querySelector(".input").onkeydown = checkEnter;
 
-function getElem(arr) {
-	arr.forEach((key) => {
-		temp.push(key.innerText);
-	});
-	return temp;
-}
-console.log(getElem(tasks));
+// function getElem(arr) {
+// 	arr.forEach((key) => {
+// 		temp.push(key.innerText);
+// 	});
+// 	return temp;
+// }
+//
+// console.log(getElem(tasks));
 
-function createElem (taskString) {
-	const elem = document.createElement('li');
-	elem.className = 'task';
-	elem.style.listStyle = 'none';
-	const checkBox = document.createElement('input');
-	const label = document.createElement('label');
-	const deleteBtn = document.createElement('button');
-	label.innerText= taskString;
-	checkBox.type = 'checkbox';
-	deleteBtn.innerText= 'delete';
-	deleteBtn.classList.add('delete')
-	document.querySelector('.to_do').append(elem);
+
+function createElem(taskString) {
+	const elem = document.createElement("li");
+	const checkBox = document.createElement("input");
+	const label = document.createElement("label");
+	const deleteBtn = document.createElement("button");
+	
+	elem.className = "task";
+	elem.style.listStyle = "none";
+	label.innerText = taskString;
+	checkBox.type = "checkbox";
+	deleteBtn.innerText = "delete";
+	deleteBtn.classList.add("delete");
+	
+	document.querySelector(".to_do").append(elem);
 	// elem.appendChild(checkBox);
 	elem.appendChild(label);
 	elem.appendChild(deleteBtn);
-	// document.querySelector('.delete').addEventListener('click', () => deleteTask());
-	const del = document.querySelectorAll('.delete');
-	del.forEach(i => i.addEventListener('click', () => deleteTask()))
+	const list = document.querySelectorAll("li");
+	list.forEach(i => i.addEventListener("click", (e) => deleteTask(e)));
 }
 
+function deleteTask(e) {
+	console.log("Delete task...");
+	const btn = e.target.closest(".delete");
+	if(!btn) {
+		return;
+	}
+	temp.pop();
+	console.log(temp);
+	
+	btn.parentElement.remove();
+	localStorage.removeItem('temp');
+}
 
 function addTask() {
-	if(newTask.value === '')return;
+	if(newTask.value === "") return;
 	temp.push(newTask.value);
 	console.log(temp);
 	console.log(newTask);
-	createElem(newTask.value)
+	
+	localStorage.setItem("temp", JSON.stringify(temp));
+	createElem(newTask.value);
 	newTask.value = "";
 }
 
-function deleteTask() {
-	console.log('Delete task...');
-	
-	const div = document.querySelector('.task');
-	// this.parentNode(div.lastChild);
-	
-	
-	
+if(localStorage.getItem("temp")) {
+	console.log("ls");
+	createElem(JSON.parse(localStorage.getItem("temp")));
 }
+
+console.log(localStorage.getItem("temp"));
+
 
 
