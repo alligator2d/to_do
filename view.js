@@ -23,7 +23,7 @@ function createElem(taskString) {
 	list.forEach(i => i.addEventListener("click", (e) => {
 		
 		deleteTask(e);
-		localStorage.removeItem('temp', i);
+		// localStorage.removeItem('temp', i);
 		console.log('working')
 		
 	}));
@@ -41,9 +41,9 @@ function deleteTask(e) {
 	// localStorage.removeItem('temp', btn);
 	// temp.filter(i => )
 	
-	// localStorage.removeItem('temp');
+	localStorage.removeItem('temp', btn);
 	
-	localStorage.setItem('temp', JSON.stringify(temp));
+	// localStorage.setItem('temp', JSON.stringify(temp));
 }
 
 function addTask() {
