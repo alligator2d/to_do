@@ -16,8 +16,6 @@ function createElem(taskString) {
 	elem.appendChild(label);
 	elem.appendChild(deleteBtn);
 	const list = document.querySelectorAll("li");
-	
-	
 	// list.forEach(i => i.addEventListener("click", (e) => deleteTask(e)));
 	
 	list.forEach(i => i.addEventListener("click", (e) => {
@@ -38,10 +36,14 @@ function deleteTask(e) {
 	console.log(temp);
 	
 	btn.parentElement.remove();
-	// localStorage.removeItem('temp', btn);
-	// temp.filter(i => )
 	
-	localStorage.removeItem('temp', btn);
+	
+	// localStorage.removeItem('temp', btn);
+	
+	addLocalStorage(temp);
+	console.log('hello oleg');
+	getFromLocalStorage();
+	
 	
 	// localStorage.setItem('temp', JSON.stringify(temp));
 }
@@ -55,7 +57,12 @@ function addTask() {
 	// let task = newTask.innerHTML;
 	// localStorage.setItem('tasks', task);
 	
-	localStorage.setItem("temp", JSON.stringify(temp));
+	// localStorage.setItem("temp", JSON.stringify(temp));
+	addLocalStorage(temp);
 	createElem(newTask.value);
 	newTask.value = "";
+}
+
+function addLocalStorage(todos) {
+	localStorage.setItem('temp', JSON.stringify(todos));
 }
